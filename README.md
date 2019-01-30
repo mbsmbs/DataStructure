@@ -188,3 +188,55 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
+
+##### 배열을 역순으로 정렬합니다.
+```C
+//배열을 역순으로 정렬합니다.
+#include <stdio.h>
+#include <stdlib.>
+
+//type형 x와 y값을 교환
+#define swap(type, x, y) do{ type t = x; x =y; y =t;} while(0)
+
+// 요소 갯수가 n인 배열 a의 요소를 역순으로 정렬
+void ary_reverse(int a[], int n)
+{
+    int i;
+    for( i = 0; i < n / 2; i++) // 입력받은 요소 갯수 만큼 반복
+    {
+        swap(int, a[i], a[ n - i - 1 ]); // do{ int t = a[i]; a[i] = a[n - i - 1]; a[n - i - 1] = t;} while(0);
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    int i;
+    int * x; // 배열 첫번째 요소의 포인터
+    int nx; // 배열 x의 요소 개수
+
+    printf("요소 개수 : ");
+    scanf("%d", &nx); // 요소 개수 입력 받음
+
+    x = calloc(nx, sizeof(int)); // x에 int형 size에 nx 수 만큼 메모리 할당
+    
+    printf("%d개의 정수를 입력하세요.\n", nx); // 요소갯수 출력
+    
+    for(i = 0; i < nx; i++) // 요소 갯수만큼 반복
+    {
+        printf("x[%d] = %d\n", i, x[i]); // 출력
+    }
+    
+    ary_reverse(x, nx); //x에 배열 생성했고 nx 배열의 요소갯수를 입력 받았으니 역순으로 정렬하는 함수 호출
+    
+    printf("배열의 요소를 역순으로 정렬했습니다.\n");
+    
+    for(i = 0; i < nx; i++)
+    {
+        printf("x[%d] = %d\n", i, x[i]);
+    }
+
+    free(x); // 배열 x 해제
+
+    return 0;
+}
+```
